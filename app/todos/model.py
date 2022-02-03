@@ -1,4 +1,3 @@
-from email.policy import default
 from app.models import BaseModel
 from ..extensions import db
 import enum

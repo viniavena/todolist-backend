@@ -18,9 +18,12 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     id = ma.Integer(dump_only = True)
     
     name = ma.String(required = True)
+
     email = ma.Email(required = True)
+    
     password = ma.String(load_only = True, required = True , validate = validate_password)
-    lists = ma.Nested(ListSchema, many = True)
+    
+    lists = ma.Nested(ListSchema, many = True, dump_only = True)
 
     @validates('name')
     def validate_name(self, name):

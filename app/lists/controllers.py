@@ -42,7 +42,7 @@ class ListFunctions(MethodView):
         
         return schema.dump(list), 200
     
-    # list/<int:list_id>
+    # /list/<int:list_id>
     def get(self, list_id):
         user_id = get_jwt_identify()
         validate_user_id (user_id)
@@ -53,7 +53,7 @@ class ListFunctions(MethodView):
 
         return schema.dump(list), 200
 
-    # list/<int:list_id>
+    # /list/<int:list_id>/delete
     def delete(self, list_id): 
         user_id = get_jwt_identify()
         validate_user_id (user_id)

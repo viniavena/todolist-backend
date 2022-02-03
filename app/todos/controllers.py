@@ -40,7 +40,7 @@ class ToDoFunctions(MethodView):
 
         return ToDoSchema().dump(todo), 200
 
-    # /todo/<int:todo_id>
+    # /todo/<int:todo_id>/edit
     def patch(self,todo_id):
         user_id = get_jwt_identity()
         validate_user_id(user_id)
@@ -63,7 +63,7 @@ class ToDoFunctions(MethodView):
 
         return schema.dump(todo), 200
 
-    
+      # /todo/<int:todo_id>/delete
     def delete(self, todo_id):
         user_id = get_jwt_identity()
         validate_user_id(user_id)

@@ -2,6 +2,11 @@ from marshmallow import validates, ValidationError
 
 from ..extensions import ma
 from .model import User
+from ..lists.schema import ListSchema
+
+def validate_password(password):
+    if len(password) < 6:
+        raise ValidationError('Invalid password: Minimum 6 characters')
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
 
@@ -14,7 +19,8 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     
     name = ma.String(required = True)
     email = ma.Email(required = True)
-    password = ma.String(load_only = True, required = True , validate=validate_password )
+    password = ma.String(load_only = True, required = True , validate = validate_password)
+    lists = ma.Nested(ListSchema, many = True)
 
     @validates('name')
     def validate_name(self, name):

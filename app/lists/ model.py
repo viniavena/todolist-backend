@@ -1,6 +1,5 @@
 from app.models import BaseModel
 from ..extensions import db
-import enum
 
 class ToDo(BaseModel):
     __tablename__ = 'todo'

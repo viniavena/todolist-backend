@@ -1,0 +1,35 @@
+User
+{
+    id
+    name
+    email
+    password
+    created_at
+    updated_at
+    Lists []
+}
+
+List
+{
+    id
+    title
+    kind
+    created_at
+    updated_at
+    ToDos []
+}
+
+Todo
+{
+    id
+    title
+    description
+    priority
+    done
+    created_at
+    updated_at
+}
+
+
+ User    1 -> n     List
+ List    1 -> n     ToDo

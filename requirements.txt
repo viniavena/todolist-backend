@@ -1,2 +1,9 @@
 flask
-redis
+flask-sqlalchemy
+flask-migrate
+bcrypt
+flask-mail
+flask-jwt-extended
+flask-marshmallow
+marshmallow-sqlalchemy
+psycopg2

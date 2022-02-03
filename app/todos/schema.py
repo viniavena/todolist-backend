@@ -1,3 +1,4 @@
+from email.policy import default
 from marshmallow import validates, ValidationError
 
 from ..extensions import ma
@@ -18,4 +19,4 @@ class ToDoSchema(ma.SQLAlchemyAutoSchema):
     
     priority = ma.String(required = True)
 
-    done = ma.Boolean(required = True)
+    done = ma.Boolean(default = False)

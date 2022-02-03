@@ -1,3 +1,4 @@
+from email.policy import default
 from app.models import BaseModel
 from ..extensions import db
 import enum
@@ -19,6 +20,6 @@ class ToDo(BaseModel):
     
     priority = db.Column(PriorityChoices, nullable = False)
 
-    done = db.Column(db.Boolean, nullable = False)
+    done = db.Column(db.Boolean, default = False)
 
     list_id = db.Column(db.Integer, db.ForeignKey('lists.id'))

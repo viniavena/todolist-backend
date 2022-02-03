@@ -16,7 +16,7 @@ class ToDoFunctions(MethodView):
     def post(self, list_id): # /todo/new/<int:list_id>
 
         user_id = get_jwt_identity()
-        user =  validate_user_id(user_id)
+        validate_user_id(user_id)
 
         list = List.query.get_or_404(list_id)
 
@@ -39,3 +39,40 @@ class ToDoFunctions(MethodView):
         list.update()
 
         return ToDoSchema().dump(todo), 200
+
+    # /todo/<int:todo_id>
+    def patch(self,todo_id):
+        user_id = get_jwt_identity()
+        validate_user_id(user_id)
+
+        todo = ToDo.query.get_or_404(todo_id)
+    
+        data = request.json
+        schema = ToDoSchema()
+
+        try:
+            todo = schema.load(data, instance = todo, partial = True)
+        except ValidationError as err:
+            abort(
+                make_response(
+                    err.messages, 400
+                )
+            )
+        
+        todo.update()
+
+        return schema.dump(todo), 200
+
+    
+    def delete(self, todo_id):
+        user_id = get_jwt_identity()
+        validate_user_id(user_id)
+
+        todo = ToDo.query.filter_by(id = todo_id).first()
+
+        if not todo:
+            return {"Error":"To Do not found"}, 404
+
+        todo.delete()
+        
+        return {"Status":"To Do deleted"}, 200

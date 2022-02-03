@@ -24,7 +24,7 @@ class IntEnum(db.TypeDecorator):
 
 
 class ToDo(BaseModel):
-    __tablename__ = 'todo'
+    __tablename__ = 'todos'
     
     title = db.Column(db.String(64), nullable=False)
     
@@ -34,3 +34,4 @@ class ToDo(BaseModel):
 
     done = db.Column(db.Boolean, nullable = False)
 
+    list_id = db.Column(db.Integer, db.ForeignKey('lists.id'))

@@ -11,6 +11,8 @@ class User(BaseModel):
 
     password_hash = db.Column(db.LargeBinary(128), nullable = False)
     
+    lists = db.relationship('List', cascade="all, delete-orphan", backref='user')
+
     def check_password(self, password):
         return bcrypt.checkpw(password.encode(), self.password_hash)
     
